@@ -128,7 +128,7 @@ class Facture
      */
     public function getDate(): string
     {
-        return $this->date;
+        return $this->date ?: '';
     }
 
     /**
@@ -152,7 +152,7 @@ class Facture
      */
     public function getTva(): float
     {
-        return $this->tva;
+        return $this->tva ?: 0;
     }
 
     /**
@@ -176,7 +176,7 @@ class Facture
      */
     public function getAcompte(): string
     {
-        return $this->acompte;
+        return $this->acompte ?: 0;
     }
 
     /**
@@ -196,21 +196,21 @@ class Facture
     /**
      * Get acompteVal.
      *
-     * @return string
+     * @return float
      */
-    public function getAcompteVal(): string
+    public function getAcompteVal(): float
     {
-        return $this->acompteVal;
+        return $this->acompteVal ?: 0;
     }
 
     /**
      * Set acompteVal.
      *
-     * @param string $acompteVal
+     * @param float $acompteVal
      *
      * @return Facture
      */
-    public function setAcompteVal(string $acompteVal): Facture
+    public function setAcompteVal(float $acompteVal): Facture
     {
         $this->acompteVal = $acompteVal;
 
@@ -224,7 +224,7 @@ class Facture
      */
     public function getReference(): string
     {
-        return $this->reference;
+        return $this->reference ?: '';
     }
 
     /**
@@ -239,5 +239,10 @@ class Facture
         $this->reference = $reference;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('%s - %s', $this->getNumero(), $this->getReference());
     }
 }

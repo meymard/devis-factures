@@ -32,7 +32,7 @@ class Ligne
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", nullable=false)
+     * @ORM\Column(name="description", type="text", nullable=false)
      */
     protected $description;
 
