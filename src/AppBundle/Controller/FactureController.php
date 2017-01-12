@@ -4,11 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Facture;
 use AppBundle\Form\FactureType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
  * FactureController.
@@ -16,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @uses Controller
  * @author Marc EYMARD <contact@marc-eymard.fr>
  */
-class FactureController extends Controller
+class FactureController extends FOSRestController
 {
     /**
      * Liste des factures.
@@ -25,17 +24,18 @@ class FactureController extends Controller
      *
      * @return Response
      *
-     * @Route("/", name="facture")
-     * @Method("GET")
+     * @Rest\Get("/facture/list.{_format}", name="facture_list")
      */
-    public function listeAction(Request $request)
+    public function listAction(Request $request)
     {
         $factures = $this->getDoctrine()->getRepository('AppBundle:Facture')->findAll(['date' => 'desc']);
 
-        return $this->render('AppBundle:Facture:liste.html.twig', [
-            'factures' => $factures
-        ]);
-    }
+        $view = $this->view($factures, 200)
+            ->setTemplate("AppBundle:Facture:list.html.twig")
+            ->setTemplateVar('factures');
+
+        return $this->handleView($view);
+}
 
     /**
      * saveAction.
@@ -45,9 +45,7 @@ class FactureController extends Controller
      *
      * @return Response
      *
-     * @Route("/new", name="facture_new")
-     * @Route("/{facture}/edit", name="facture_edit")
-     * @Method("GET")
+     * @Rest\Post("/facture/save", name="facture_save")
      */
     public function saveAction(Request $request, Facture $facture = null)
     {
