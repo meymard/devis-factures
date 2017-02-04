@@ -76,9 +76,18 @@
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 #}
         {% block javascripts %}
+            <script type="text/javascript">
+                {% set format = "json" %}
+                var app = {
+                    factures: '{{ path("facture_list", {"_format": format}) }}',
+                    devis: '{{ path("devis_list", {"_format": format}) }}'
+                };
+            </script>
             <script type="text/javascript" src="{{ asset('js/jquery.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('js/underscore-min.js')}}"></script>
             <script type="text/javascript" src="{{ asset('js/backbone-min.js')}}"></script>
             <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('js/app.js')}}"></script>
         {% endblock %}
 </body>
 </html>
