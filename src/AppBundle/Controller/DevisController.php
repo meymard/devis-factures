@@ -3,10 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Devis;
+use AppBundle\Form\FactureType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
 
 /**
  * DevisController.
@@ -14,9 +16,9 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  * @uses Controller
  * @author Marc EYMARD <contact@marc-eymard.fr>
  *
- * @Rest\Route("/devis")
+ * @Route("/devis")
  */
-class DevisController extends FOSRestController
+class DevisController extends Controller
 {
     /**
      * Liste des devis.
@@ -25,16 +27,46 @@ class DevisController extends FOSRestController
      *
      * @return Response
      *
-     * @Rest\Get("/list.{_format}", name="devis_list")
+     * @Route("/liste", name="devis_liste")
+     * @Method("GET")
      */
-    public function listAction(Request $request): Response
+    public function listeAction(Request $request): Response
     {
         $devis = $this->getDoctrine()->getRepository('AppBundle:Devis')->findAll(['date' => 'desc']);
 
-        $view = $this->view($devis, 200)
-            ->setTemplate("AppBundle:Devis:list.html.twig")
-            ->setTemplateVar('devis');
+        return $this->render("AppBundle:Devis:liste.html.twig", ['devis' => $devis]);
+    }
 
-        return $this->handleView($view);
+    /**
+     * Nouveau devis.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @Route("/nouveau", name="devis_nouveau")
+     * @Route("/duppliquer/{original}", requirements={"devis": "[0-9]+"}, name="devis_duppliquer")
+     * @Method({"GET", "PUT"})
+     */
+    public function nouveauAction(Request $request, Devis $original = null): Response
+    {
+        if ($original) {
+            $devis = clone $original;
+        } else {
+            $devis = new Devis();
+        }
+
+        $form = $this->createForm(FactureType::class, $devis, [
+            'action' => $this->generateUrl('devis_nouveau'),
+            'method' => 'PUT'
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            var_dump($devis);
+            exit;
+        }
+
+        return $this->render('AppBundle:Devis:nouveau.html.twig', ['form' => $form->createView()]);
     }
 }

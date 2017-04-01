@@ -80,7 +80,7 @@
                 {% set format = "json" %}
                 var app = {
                     factures: '{{ path("facture_list", {"_format": format}) }}',
-                    devis: '{{ path("devis_list", {"_format": format}) }}'
+                    devis: '{{ path("devis_liste") }}'
                 };
             </script>
             <script type="text/javascript" src="{{ asset('js/jquery.min.js')}}"></script>

@@ -47,6 +47,8 @@ abstract class FactureAbstract
     protected $tva;
 
     /**
+     * Pourcentage d'acompte.
+     *
      * @var float
      *
      * @ORM\Column(name="accompte", type="integer", nullable=false)
