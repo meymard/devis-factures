@@ -62,7 +62,7 @@ class DevisController extends Controller
         ]);
 
         $form->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             var_dump($devis);
             exit;
         }

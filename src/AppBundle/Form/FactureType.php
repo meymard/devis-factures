@@ -1,6 +1,8 @@
 <?php
+
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,12 +22,17 @@ class FactureType extends AbstractType
     {
         $builder
             ->add('date')
-            ->add('tva')
+            ->add('tva', EntityType::class, [
+                'class' => 'AppBundle:TVA'
+            ])
             ->add('acompte')
             ->add('acompteVal')
             ->add('reference');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultOptions(array $options)
     {
         return [
@@ -33,6 +40,9 @@ class FactureType extends AbstractType
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'facture';

@@ -18,7 +18,7 @@ class Version20170401185952 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
 
         $this->addSql("
-            insert into tva ('tva') values
+            INSERT IGNORE INTO tva VALUES
             (2.1),
             (7),
             (10),

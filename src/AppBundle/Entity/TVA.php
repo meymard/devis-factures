@@ -51,6 +51,6 @@ class TVA
      */
     public function __toString()
     {
-        return number_format($this->getTva(), 2, ',', ' ');
+        return sprintf('%s %%', number_format($this->getTva(), 2, ',', ' '));
     }
 }
