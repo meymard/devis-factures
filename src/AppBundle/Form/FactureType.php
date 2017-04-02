@@ -2,8 +2,10 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Form\Facture\LigneType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,7 +29,14 @@ class FactureType extends AbstractType
             ])
             ->add('acompte')
             ->add('acompteVal')
-            ->add('reference');
+            ->add('reference')
+            ->add('lignes', CollectionType::class, [
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'entry_type' => Facture\LigneType::class,
+            ]);
     }
 
     /**

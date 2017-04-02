@@ -1,7 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends '::baseform.html.twig' %}
 
 {% block title %}Nouveau devis{% endblock %}
 {% block body %}
-    {{ form(form) }}
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ form_row(form.date) }} </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ form_row(form.tva) }} </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ form_row(form.acompte) }} </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ form_row(form.acompteVal) }} </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">{{ form_row(form.reference) }} </div>
+        </div>
+    {{ form_end(form) }}
 {% endblock %}
 

@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Traits;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -75,6 +77,14 @@ abstract class FactureAbstract
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Facture\Ligne", mappedBy="facture")
      */
     protected $lignes;
+
+    /**
+     * __construct.
+     */
+    public function __construct()
+    {
+        $this->lignes = new ArrayCollection();
+    }
 
     /**
      * Get id.
@@ -238,6 +248,43 @@ abstract class FactureAbstract
         return $this;
     }
 
+    /**
+     * Get lignes.
+     *
+     * @return Collection
+     */
+    public function getLignes(): Collection
+    {
+        return $this->lignes;
+    }
+
+    /**
+     * Add ligne.
+     *
+     * @param Ligne $ligne
+     *
+     * @return FactureAbstract
+     */
+    public function addLigne(Ligne $ligne)
+    {
+        $this->lignes[] = $ligne;
+
+        return $this;
+    }
+
+    /**
+     * Remove ligne.
+     *
+     * @param Ligne $ligne
+     */
+    public function removeLigne(Ligne $ligne)
+    {
+        $this->lignes->removeElement($ligne);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function __toString(): string
     {
         return sprintf('%s - %s', $this->getNumero(), $this->getReference());
