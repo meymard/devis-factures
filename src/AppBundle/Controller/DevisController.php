@@ -6,6 +6,7 @@ use AppBundle\Entity\Devis;
 use AppBundle\Form\FactureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,6 +61,7 @@ class DevisController extends Controller
             'action' => $this->generateUrl('devis_nouveau'),
             'method' => 'PUT'
         ]);
+        $form->add('enregistrer', SubmitType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
