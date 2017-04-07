@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Form\Facture\LigneType;
+use AppBundle\Entity\TVA;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,7 +26,7 @@ class FactureType extends AbstractType
         $builder
             ->add('date')
             ->add('tva', EntityType::class, [
-                'class' => 'AppBundle:TVA'
+                'class' => 'AppBundle:TVA',
             ])
             ->add('acompte')
             ->add('acompteVal')

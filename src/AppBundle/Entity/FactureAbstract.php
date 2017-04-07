@@ -165,13 +165,19 @@ abstract class FactureAbstract
     /**
      * Set tva.
      *
-     * @param float $tva
+     * @param float|TVA $tva
      *
      * @return Facture
      */
-    public function setTva(float $tva): Facture
+    public function setTva($tva): Facture
     {
-        $this->tva = $tva;
+        if ($tva instanceof TVA) {
+            $this->tva = $tva->getTva();
+        } elseif (is_float($tva)) {
+            $this->tva = $tva;
+        } else {
+            throw new \Exception('TVA ou float attendu');
+        }
 
         return $this;
     }

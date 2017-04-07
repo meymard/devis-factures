@@ -65,8 +65,7 @@ class DevisController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            var_dump($devis);
-            exit;
+            $this->getDoctrine()->getManager()->flush();
         }
 
         return $this->render('AppBundle:Devis:nouveau.html.twig', ['form' => $form->createView()]);
