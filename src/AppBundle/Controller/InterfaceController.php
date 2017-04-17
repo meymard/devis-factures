@@ -22,7 +22,7 @@ class InterfaceController extends Controller
      *
      * @return Response
      *
-     * @Route("/", name="accueil")
+     * @Route("/", name="homepage")
      */
     public function accueilAction(Request $request)
     {
