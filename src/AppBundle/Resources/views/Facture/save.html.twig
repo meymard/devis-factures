@@ -3,3 +3,30 @@
 {% block body %}
     {{ form(form) }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script type="text/javascript">
+    function ajoutLigne() {
+        var div = $('#facture_lignes');
+
+        var prototype = div.data('prototype');
+        var index = div.data('index');
+        var newForm = prototype.replace(/__name__/g, index);
+
+        div.data('index', index + 1);
+
+        $('#btn-add-ligne').before(newForm);
+    }
+    $(function() {
+        $('#facture_lignes').append('<button id="btn-add-ligne" type="button">Ajouter</button>');
+        $('#btn-add-ligne').on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // add a new tag form (see next code block)
+            ajoutLigne();
+        });
+    });
+</script>
+{% endblock %}

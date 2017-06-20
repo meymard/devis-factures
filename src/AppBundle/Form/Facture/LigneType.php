@@ -23,7 +23,10 @@ class LigneType extends AbstractType
         $builder
             ->add('description')
             ->add('quantite')
-            ->add('prix');
+            ->add('prix')
+            ->add('tva', EntityType::class, [
+                'class' => 'AppBundle:TVA',
+            ]);
     }
 
     /**

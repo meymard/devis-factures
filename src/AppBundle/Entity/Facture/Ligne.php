@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Facture;
 
 use AppBundle\Entity\Facture;
+use AppBundle\Entity\TVA;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,14 @@ class Ligne
      * @ORM\Column(name="prix", type="float", nullable=false)
      */
     protected $prix;
+
+    /**
+     * @var TVA
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TVA")
+     * @ORM\JoinColumn(name="tva", referencedColumnName="tva")
+     */
+    protected $tva;
 
     /**
      * Get id.
@@ -152,6 +161,30 @@ class Ligne
     public function setPrix(float $prix): Ligne
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get tva.
+     *
+     * @return TVA
+     */
+    public function getTva()
+    {
+        return $this->tva;
+    }
+
+    /**
+     * Set tva.
+     *
+     * @param TVA $tva
+     *
+     * @return Ligne
+     */
+    public function setTva(TVA $tva): TVA
+    {
+        $this->tva = $tva;
 
         return $this;
     }

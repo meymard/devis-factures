@@ -23,6 +23,15 @@ class TVA
     protected $tva;
 
     /**
+     * Message d'indication à afficher sur les factures.
+     *
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", nullable=true)
+     */
+    protected $libelle;
+
+    /**
      * Get tva.
      *
      * @return float
@@ -42,6 +51,30 @@ class TVA
     public function setTva(float $tva): TVA
     {
         $this->tva = $tva;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle.
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set libelle.
+     *
+     * @param string $libelle
+     *
+     * @return TVA
+     */
+    public function setLibelle(string $libelle): TVA
+    {
+        $this->libelle = $libelle;
 
         return $this;
     }
