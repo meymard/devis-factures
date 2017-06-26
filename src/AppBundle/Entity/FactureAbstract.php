@@ -20,6 +20,7 @@ abstract class FactureAbstract
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Id
      */
     protected $id;
@@ -37,7 +38,7 @@ abstract class FactureAbstract
      * @var \DateTime
      * TODO // Format final :  ORM\Column(name="date", type="date", nullable=false)
      *
-     * @ORM\Column(name="date", type="string", length=10, nullable=false)
+     * @ORM\Column(name="date", type="date", nullable=false)
      */
     protected $date;
 
@@ -75,6 +76,7 @@ abstract class FactureAbstract
      * @var Collection
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Facture\Ligne", mappedBy="facture")
+     * @ORM\JoinColumn(nullable=false)
      */
     protected $lignes;
 
@@ -131,21 +133,21 @@ abstract class FactureAbstract
     /**
      * Get date.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getDate(): string
+    public function getDate(): \DateTime
     {
-        return $this->date ?: '';
+        return $this->date ?: new \DateTime();
     }
 
     /**
      * Set date.
      *
-     * @param string $date
+     * @param \DateTime $date
      *
      * @return Facture
      */
-    public function setDate(string $date): Facture
+    public function setDate(\DateTime $date): Facture
     {
         $this->date = $date;
 
@@ -271,8 +273,9 @@ abstract class FactureAbstract
      *
      * @return FactureAbstract
      */
-    public function addLigne(Ligne $ligne)
+    public function addLigne(Ligne $ligne): FactureAbstract
     {
+        $ligne->setFacture($this);
         $this->lignes[] = $ligne;
 
         return $this;

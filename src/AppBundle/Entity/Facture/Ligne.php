@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Marc EYMARD <contact@marc-eymard.fr>
  *
  * @ORM\Entity
+ * @ORM\Table(name="facture_ligne")
  */
 class Ligne
 {

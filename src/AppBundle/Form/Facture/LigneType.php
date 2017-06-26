@@ -3,6 +3,7 @@
 namespace AppBundle\Form\Facture;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -23,7 +24,7 @@ class LigneType extends AbstractType
         $builder
             ->add('description')
             ->add('quantite')
-            ->add('prix')
+            ->add('prix', MoneyType::class)
             ->add('tva', EntityType::class, [
                 'class' => 'AppBundle:TVA',
             ]);

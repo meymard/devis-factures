@@ -65,6 +65,7 @@ class DevisController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->persist($devis);
             $this->getDoctrine()->getManager()->flush();
         }
 
