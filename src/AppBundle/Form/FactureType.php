@@ -32,8 +32,7 @@ class FactureType extends AbstractType
             ->add('tva', EntityType::class, [
                 'class' => 'AppBundle:TVA',
             ])
-            ->add('acompte')
-            ->add('acompteVal', NumberType::class)
+            ->add('acompte', NumberType::class)
             ->add('reference')
             ->add('lignes', CollectionType::class, [
                 'label' => false,

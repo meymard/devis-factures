@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Facture.
+ * FactureAbstract.
  *
  * @author Marc EYMARD <contact@marc-eymard.fr>
  */
@@ -30,13 +30,12 @@ abstract class FactureAbstract
      *
      * @var string
      *
-     * @ORM\Column(name="num", type="string", length=5, nullable=false)
+     * @ORM\Column(name="num", type="string", length=10, nullable=false)
      */
     protected $numero;
 
     /**
      * @var \DateTime
-     * TODO // Format final :  ORM\Column(name="date", type="date", nullable=false)
      *
      * @ORM\Column(name="date", type="date", nullable=false)
      */
@@ -50,20 +49,11 @@ abstract class FactureAbstract
     protected $tva;
 
     /**
-     * Pourcentage d'acompte.
-     *
      * @var float
      *
-     * @ORM\Column(name="accompte", type="integer", nullable=false)
+     * @ORM\Column(name="acompte", type="float", nullable=false)
      */
     protected $acompte;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="acompte_val", type="float", nullable=false)
-     */
-    protected $acompteVal;
 
     /**
      * @var string
@@ -121,9 +111,9 @@ abstract class FactureAbstract
      *
      * @param string $numero
      *
-     * @return Facture
+     * @return FactureAbstract
      */
-    public function setNumero(string $numero): Facture
+    public function setNumero(string $numero): FactureAbstract
     {
         $this->numero = $numero;
 
@@ -145,9 +135,9 @@ abstract class FactureAbstract
      *
      * @param \DateTime $date
      *
-     * @return Facture
+     * @return FactureAbstract
      */
-    public function setDate(\DateTime $date): Facture
+    public function setDate(\DateTime $date): FactureAbstract
     {
         $this->date = $date;
 
@@ -169,9 +159,9 @@ abstract class FactureAbstract
      *
      * @param float|TVA $tva
      *
-     * @return Facture
+     * @return FactureAbstract
      */
-    public function setTva($tva): Facture
+    public function setTva($tva): FactureAbstract
     {
         if ($tva instanceof TVA) {
             $this->tva = $tva->getTva();
@@ -187,9 +177,9 @@ abstract class FactureAbstract
     /**
      * Get acompte.
      *
-     * @return string
+     * @return float
      */
-    public function getAcompte(): string
+    public function getAcompte(): float
     {
         return $this->acompte ?: 0;
     }
@@ -197,37 +187,13 @@ abstract class FactureAbstract
     /**
      * Set acompte.
      *
-     * @param string $acompte
+     * @param float $acompte
      *
-     * @return Facture
+     * @return FactureAbstract
      */
-    public function setAcompte(string $acompte): Facture
+    public function setAcompte(float $acompte): FactureAbstract
     {
         $this->acompte = $acompte;
-
-        return $this;
-    }
-
-    /**
-     * Get acompteVal.
-     *
-     * @return float
-     */
-    public function getAcompteVal(): float
-    {
-        return $this->acompteVal ?: 0;
-    }
-
-    /**
-     * Set acompteVal.
-     *
-     * @param float $acompteVal
-     *
-     * @return Facture
-     */
-    public function setAcompteVal(float $acompteVal): Facture
-    {
-        $this->acompteVal = $acompteVal;
 
         return $this;
     }
@@ -247,9 +213,9 @@ abstract class FactureAbstract
      *
      * @param string $reference
      *
-     * @return Facture
+     * @return FactureAbstract
      */
-    public function setReference(string $reference): Facture
+    public function setReference(string $reference): FactureAbstract
     {
         $this->reference = $reference;
 
