@@ -6,8 +6,7 @@ use AppBundle\Entity\Facture;
 use AppBundle\Form\FactureType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * FactureController.
@@ -15,9 +14,8 @@ use FOS\RestBundle\Controller\Annotations as Rest;
  * @uses Controller
  * @author Marc EYMARD <contact@marc-eymard.fr>
  *
- * @Rest\Route("/factures")
  */
-class FactureController extends FOSRestController
+class FactureController extends Controller
 {
     /**
      * Liste des factures.
@@ -26,7 +24,6 @@ class FactureController extends FOSRestController
      *
      * @return Response
      *
-     * @Rest\Get("/list.{_format}", name="facture_list")
      */
     public function listAction(Request $request): Response
     {
@@ -47,7 +44,6 @@ class FactureController extends FOSRestController
      *
      * @return Response
      *
-     * @Rest\Post("/{facture}.{_format}", name="facture_save")
      */
     public function postAction(Request $request, Facture $facture = null): Response
     {

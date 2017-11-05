@@ -74,7 +74,7 @@
             <script type="text/javascript">
                 {% set format = "json" %}
                 var app = {
-                    factures: '{{ path("facture_list", {"_format": format}) }}',
+                    factures: '{{ path("devis_liste") }}',
                     devis: '{{ path("devis_liste") }}'
                 };
             </script>
