@@ -15,12 +15,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TVA
 {
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id", type="guid")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    protected $id;
 
     /**
      * @var float
      *
      * @ORM\Column(name="tva", type="float", nullable=false)
-     * @ORM\Id
      */
     protected $tva;
 

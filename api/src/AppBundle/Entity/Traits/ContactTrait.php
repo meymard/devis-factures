@@ -37,7 +37,7 @@ trait ContactTrait
      *
      * @ORM\Column(name="code_postal", type="string", length=5, nullable=false)
      */
-    protected $code_postal;
+    protected $codePostal;
 
     /**
      * @var string
@@ -102,27 +102,27 @@ trait ContactTrait
     }
 
     /**
-     * Set code_postal.
+     * Set codePostal.
      *
-     * @param string $code_postal
+     * @param string $codePostal
      *
      * @return this
      */
-    public function setCode_postal(string $code_postal)
+    public function setCodePostal(string $codePostal)
     {
-        $this->code_postal = $code_postal;
+        $this->codePostal = $codePostal;
 
         return $this;
     }
 
     /**
-     * Get code_postal.
+     * Get codePostal.
      *
      * @return string
      */
-    public function getCode_postal(): string
+    public function getCodePostal(): string
     {
-        return $this->code_postal;
+        return $this->codePostal;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Facture;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use AppBundle\Entity\Facture;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,14 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Marc EYMARD <contact@marc-eymard.fr>
  *
  * @ORM\Entity
+ * @ApiResource
  */
 class Ligne
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="guid")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     protected $id;
 
@@ -53,9 +56,9 @@ class Ligne
     /**
      * Get id.
      *
-     * @return int
+     * @return string
      */
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
