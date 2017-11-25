@@ -4,7 +4,7 @@ import Axios from 'axios';
 class AbstractModel extends Component {
     constructor(props) {
         super(props);
-        this.basePath = 'http://localhost:8181/app_dev.php/';
+        this.basePath = 'http://web/app_dev.php/';
     }
     getElements() {
         Axios.get(this.basePath + 'devis')
